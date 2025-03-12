@@ -1,0 +1,28 @@
+POST http://localhost:8080/api/professor/registrar
+Content-Type: application/json
+
+{
+    
+  "nome": "João Silva",
+  "cpf": "125.456.789-00",
+  "dataNascimento": "2000-01-01",
+  "endereco": "Rua das Flores, 123",
+  "telefone": "11987654321",
+  "email": "joao.silva@example.com"
+
+
+}
+
+PUT http://localhost:8080/api/aluno/1
+Content-Type: application/json
+
+{
+    
+  "nome": "João Silva",
+  "cpf": "125.456.789-00",
+  "dataNascimento": "2000-01-01",
+  "endereco": "Rua das Flores, 123",
+  "telefone": "11987654321",
+  "email": "Naosei@gmail.com"
+  }
+
