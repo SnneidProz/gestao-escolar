@@ -1,3 +1,17 @@
+POST http://localhost:8080/api/disciplina/registrar
+Content-Type: application/json
+
+{
+    
+  "cargaHoraria": 60,
+  "codigo": "MAT002",
+  "nome": "Matemática",
+  "professor": {
+    "id": 1
+  }
+
+}
+
 POST http://localhost:8080/api/professor/registrar
 Content-Type: application/json
 
@@ -10,19 +24,23 @@ Content-Type: application/json
   "telefone": "11987654321",
   "email": "joao.silva@example.com"
 
-
 }
 
-PUT http://localhost:8080/api/aluno/1
+PUT http://localhost:8080/api/professor/1
 Content-Type: application/json
 
 {
     
   "nome": "João Silva",
-  "cpf": "125.456.789-00",
+  "cpf": "123.456.789-00",
   "dataNascimento": "2000-01-01",
   "endereco": "Rua das Flores, 123",
   "telefone": "11987654321",
-  "email": "Naosei@gmail.com"
-  }
+  "email": "Naosei@gmail.com",
+  "disciplinaIds": [
+    {
+      "id": 1
+    }
+  ]
+}
 

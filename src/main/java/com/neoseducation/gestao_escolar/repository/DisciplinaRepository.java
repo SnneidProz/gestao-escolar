@@ -8,6 +8,6 @@ import com.neoseducation.gestao_escolar.entities.Disciplina;
 
 public interface DisciplinaRepository extends JpaRepository <Disciplina, Long> {
     
-    Optional<Disciplina> findById(Long Id);
+    Optional<Disciplina> findByCodigo(String codigo);
 
 }

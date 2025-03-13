@@ -29,7 +29,7 @@ public class ProfessorController {
 
 
     @PostMapping
-    public ResponseEntity<Professor> CreateProfessor (Professor professor){
+    public ResponseEntity<Professor> CreateProfessor (@RequestBody Professor professor){
         return ResponseEntity.status((HttpStatus.CREATED)).body(professorRepository.save(professor));
     }
 
@@ -67,7 +67,7 @@ public class ProfessorController {
             professorData.setTelefone(professor.getTelefone());
             professorData.setEmail(professor.getEmail());
             professorData.setEndereco(professor.getEndereco());
-            professorData.setDisciplina(professor.getDisciplina());
+            professorData.setDisciplinaIds(professor.getDisciplinaIds());
             return ResponseEntity.status(HttpStatus.OK).body(professorRepository.save(professorData));
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

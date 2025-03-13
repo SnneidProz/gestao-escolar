@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 @Entity
-@Table(name = "disciplinas")
+@Table(name = "disciplina")
 public class Disciplina {
 
     @Id
@@ -23,8 +23,7 @@ public class Disciplina {
 
     @ManyToOne
     @JoinColumn(name = "professor_id", nullable = false)
-    private Professor professor; // Relacionamento com a entidade Professor
-
+    private Professor professor;
     // Getters e Setters
     public Long getId() {
         return id;
@@ -57,7 +56,7 @@ public class Disciplina {
     public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
-
+    
     public Professor getProfessor() {
         return professor;
     }
@@ -65,4 +64,5 @@ public class Disciplina {
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
+
 }

@@ -4,14 +4,16 @@ import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.*;
 
 @Entity
@@ -37,8 +39,11 @@ public class Professor {
     @Email(message = "E-mail inválido")
     private String email;
 
-    @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Disciplina> disciplinas;
+
+    @ElementCollection
+    @CollectionTable(name = "professor_disciplinas", joinColumns = @JoinColumn(name = "professor_id"))
+    @Column(name = "disciplina_id")
+    private List<Long> disciplinaIds;
     // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -54,6 +59,7 @@ public class Professor {
     public void setTelefone(String telefone) { this.telefone = telefone; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
-    public List<Disciplina> getDisciplina() { return disciplinas; }
-    public void setDisciplina(List<Disciplina> disciplinas) { this.disciplinas = disciplinas; }
+    public List<Long> getDisciplinaIds() { return disciplinaIds; }
+
+    public void setDisciplinaIds(List<Long> disciplinaIds) { this.disciplinaIds = disciplinaIds;}
 }
