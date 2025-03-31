@@ -89,28 +89,39 @@ document.addEventListener("DOMContentLoaded", function () {
     formDisciplina.addEventListener("submit", function (event) {
         event.preventDefault(); // Evita o reload da página
 
-        const disciplina = {
-            nomedadisciplina: document.querySelector("#nome").value,
-            codigo: document.querySelector("#codigo").value,
-            cargaHoraria: document.querySelector("#cargaHoraria").value,
-            professor: document.querySelector("#professor").value
-        };
+        const professorId = document.querySelector("#professor").value;
 
+        // Verifique se o valor é um número e não "undefined"
+        if (!professorId || isNaN(professorId)) {
+            alert("Por favor, selecione um professor válido.");
+            return;
+        }
+
+        
+        const disciplina = {
+            nome: document.querySelector("#nomedisciplina").value,
+            codigo: document.querySelector("#codigodisciplina").value,
+            cargaHoraria: document.querySelector("#cargahoraria").value,
+            professor: { id: parseInt(professorId) } // Certifique-se de passar um objeto
+        };
+        
+        console.log("Enviando disciplina:", JSON.stringify(disciplina, null, 2));
+        
         fetch("http://localhost:8080/api/disciplina/registrar", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(disciplina)
         })
         .then(response => response.json())
         .then(data => {
-            alert("disciplina cadastrado com sucesso!");
+            alert("Disciplina cadastrada com sucesso!");
             formDisciplina.reset();
         })
         .catch(error => console.error("Erro ao cadastrar disciplina:", error));
     });
 });
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const selectProfessor = document.querySelector("#professor");
 
@@ -121,13 +132,15 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(professor => {
                 professor.forEach(professor => {
                     const option = document.createElement("option");
-                    option.value = professor.nome; // Supondo que o nome está no campo 'nome'
+                    option.value = professor.id; // Supondo que o nome está no campo 'nome'
                     option.textContent = `${professor.nome}`;
                     selectProfessor.appendChild(option);
                 });
             })
+            
             .catch(error => console.error("Erro ao buscar Professores:", error));
     }
 
     carregarProfessores();
 });
+
