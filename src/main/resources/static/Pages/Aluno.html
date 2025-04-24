@@ -69,25 +69,30 @@
                     <input type="text" class="form-control" id="cpf" required placeholder="XXX.XXX.XXX-XX">
                 </div>
                 <div class="Warn mb-3">
-                    <label for="endereco" class="form-label">Endereço</label>
-                    <input type="text" class="form-control" id="endereco" required placeholder="Exemplo: Rua A, 123">
+                    <label for="cep" class="form-label">CEP</label>
+                    <input type="text" class="form-control" id="cep" required placeholder="Exemplo: 12345-678">
                 </div>
                 <div class="Warn mb-3">
-                    <label for="bairro" class="form-label">Bairro</label>
-                    <input type="text" class="form-control" id="bairro" required placeholder="Digite seu bairro">
+                    <label for="estado" class="form-label">Estado</label>
+                    <select  class="form-control"  id="estado">
+                        <option value="">Selecione um estado</option>
+                    </select>
                 </div>
                 <div class="Warn mb-3">
                     <label for="cidade" class="form-label">Cidade</label>
                     <input type="text" class="form-control" id="cidade" required placeholder="Ex: Minas Gerais">
                 </div>
+               
                 <div class="Warn mb-3">
-                    <label for="estado" class="form-label">Estado</label>
-                    <input type="text" class="form-control" id="estado" required placeholder="Ex: MG">
+                    <label for="bairro" class="form-label">Bairro</label>
+                    <input type="text" class="form-control" id="bairro" required placeholder="Digite seu bairro">
                 </div>
                 <div class="Warn mb-3">
-                    <label for="cep" class="form-label">CEP</label>
-                    <input type="text" class="form-control" id="cep" required placeholder="Exemplo: 12345-678">
+                    <label for="endereco" class="form-label">Endereço</label>
+                    <input type="text" class="form-control" id="endereco" required placeholder="Exemplo: Rua A, 123">
                 </div>
+               
+    
                 <div class="Warn mb-3">
                     <label for="telefone" class="form-label">Telefone</label>
                     <input type="tel" class="form-control" id="telefone" required placeholder="(XX) XXXXX-XXXX">
@@ -101,7 +106,7 @@
             </form>
         </div>
     </div>
-    <script src="../server.js"></script>
+    <script src="../assets/aluno.js"></script>
     <script src="../assets/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

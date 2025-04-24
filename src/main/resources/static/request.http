@@ -1,4 +1,4 @@
-put http://localhost:8080/api/disciplina/1
+post http://localhost:8080/api/disciplina/registrar
 Content-Type: application/json
 
 {
@@ -26,22 +26,36 @@ Content-Type: application/json
 
 }
 
-POST http://localhost:8080/api/disciplina/registrar
+POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-    
-  "cargaHoraria": 60,
-  "codigo": "MAT005",
-  "nome": "Matemática",
-  "professor": {
-    "id": 1
-  }
-
+    "username": "usuario",
+    "password": "user123"
 }
 
 GET http://localhost:8080/api/disciplina/listar
 Content-Type: application/json
 {
+
+}
+
+
+POST http://localhost:8080/api/turma
+Content-Type: application/json
+
+{
+    
+  "codigo": "TURMA002",
+  "anoLetivo": 2023,
+  "periodo": 6,
+  "turno": "MANHA",
+
+  "disciplina": {
+    "id": 1
+  },
+  "professor": {
+    "id": 1
+  }
 
 }

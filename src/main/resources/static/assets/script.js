@@ -1,30 +1,46 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const formAluno = document.querySelector("#formularioAluno form");
-
-    formAluno.addEventListener("submit", function (event) {
-        event.preventDefault(); // Evita o reload da página
-
-        const aluno = {
-            nome: document.querySelector("#nome").value,
-            dataNascimento: document.querySelector("#dataNascimento").value,
-            cpf: document.querySelector("#cpf").value,
-            endereco: document.querySelector("#endereco").value,
-            telefone: document.querySelector("#telefone").value,
-            email: document.querySelector("#email").value
-        };
-
-        fetch("http://localhost:8080/api/aluno", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(aluno)
-        })
+function carregarProfessores() {
+    fetch("http://localhost:8080/api/professor/listar")
         .then(response => response.json())
-        .then(data => {
-            alert("Aluno cadastrado com sucesso!");
-            formAluno.reset();
+        .then(professores => {
+            const selectProfessor = document.querySelector("#professor");
+            professores.forEach(professor => {
+                const option = document.createElement("option");
+                option.value = professor.id;
+                option.textContent = professor.nome;
+                selectProfessor.appendChild(option);
+            });
         })
-        .catch(error => console.error("Erro ao cadastrar aluno:", error));
-    });
-});
+        .catch(error => console.error("Erro ao buscar professores:", error));
+}
+carregarProfessores();
+
+function carregarDisciplinas() {
+    fetch("http://localhost:8080/api/disciplina/listar")
+        .then(response => response.json())
+        .then(disciplinas => {
+            const selectDisciplina = document.querySelector("#disciplina");
+            disciplinas.forEach(disciplina => {
+                const option = document.createElement("option");
+                option.value = disciplina.id;
+                option.textContent = disciplina.nome;
+                selectDisciplina.appendChild(option);
+            });
+        })
+        .catch(error => console.error("Erro ao buscar disciplinas:", error));
+}
+carregarDisciplinas();
+function carregarEstados() {
+    fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
+        .then(response => response.json())
+        .then(estados => {
+            const selectEstado = document.querySelector("#estado");
+            estados.forEach(estado => {
+                const option = document.createElement("option");
+                option.value = estado.sigla; // Sigla do estado (ex.: SP, RJ)
+                option.textContent = estado.nome; // Nome do estado
+                selectEstado.appendChild(option);
+            });
+        })
+        .catch(error => console.error("Erro ao buscar estados:", error));
+}
+carregarEstados();

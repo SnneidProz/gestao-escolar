@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+    <div class="w-96 p-6 bg-white rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold text-center mb-4">Bem-vindo ao Painel</h2>
+        <p id="welcomeMessage" class="text-center"></p>
+        <button onclick="logout()" class="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600 mt-4">
+            Sair
+        </button>
+    </div>
+
+    <script>
+        async function checkAuthentication() {
+            let token = localStorage.getItem("token");
+
+            if (!token) {
+                window.location.href = "/login.html"; // Redireciona para login se não houver token
+            }
+
+            let response = await fetch("/admin/dashboard", {
+                headers: { "Authorization": "Bearer " + token }
+            });
+
+            if (response.ok) {
+                document.getElementById("welcomeMessage").textContent = "Você está autenticado!";
+            } else {
+                localStorage.removeItem("token");
+                window.location.href = "/login.html"; // Redireciona se o token for inválido
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("token");
+            window.location.href = "/login.html";
+        }
+
+        checkAuthentication();
+    </script>
+</body>
+</html>
