@@ -12,7 +12,7 @@ Content-Type: application/json
 
 }
 
-POST http://localhost:8080/api/professor/registrar
+POST http://localhost:8080/api/aluno/registrar
 Content-Type: application/json
 
 {
@@ -34,28 +34,23 @@ Content-Type: application/json
     "password": "user123"
 }
 
-GET http://localhost:8080/api/disciplina/listar
+GET http://localhost:8080/api/aluno/listar
 Content-Type: application/json
-{
 
-}
 
 
 POST http://localhost:8080/api/turma
 Content-Type: application/json
 
 {
-    
-  "codigo": "TURMA002",
-  "anoLetivo": 2023,
-  "periodo": 6,
-  "turno": "MANHA",
+    "codigo": "TURMA001",
+    "anoLetivo": 2023,
+    "professor": { "id": 1 },
+    "disciplina": { "id": 1 },
+    "turno": "MANHA",
+    "periodo": "2023.1",
 
-  "disciplina": {
-    "id": 1
-  },
-  "professor": {
-    "id": 1
-  }
-
+    "alunos": [
+        { "id": 1 }
+    ]
 }

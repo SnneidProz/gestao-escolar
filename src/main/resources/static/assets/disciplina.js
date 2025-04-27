@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const formDisciplina = document.querySelector("#formularioDisciplina form");
+    const formDisciplina = document.querySelector("#formDisciplina");
 
     formDisciplina.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const disciplina = {
-            nome: document.querySelector("#nomedisciplina").value,
-            codigo: document.querySelector("#codigodisciplina").value,
-            cargaHoraria: document.querySelector("#cargahoraria").value,
+            nome: document.querySelector("#nomeDisciplina").value,
+            codigo: document.querySelector("#codigoDisciplina").value,
+            cargaHoraria: document.querySelector("#cargaHoraria").value,
             professor: { id: parseInt(professorId) }
         };
 

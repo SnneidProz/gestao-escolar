@@ -1,5 +1,9 @@
 package com.neoseducation.gestao_escolar.entities;
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.validation.constraints.*;
 import jakarta.persistence.*;
 
@@ -26,6 +30,12 @@ public class Aluno {
     
     @Email(message = "E-mail inválido")
     private String email;
+    
+    @ManyToOne
+    @JoinColumn(name = "turma_id")
+    @JsonBackReference
+    private Turma turma;
+
 
     // Getters e Setters
     public Long getId() { return id; }
@@ -42,4 +52,11 @@ public class Aluno {
     public void setTelefone(String telefone) { this.telefone = telefone; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
 }

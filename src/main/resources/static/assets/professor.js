@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const formProfessor = document.querySelector("#formularioProfessor form");
+    const formProfessor = document.querySelector("#formularioProfessor");
 
     formProfessor.addEventListener("submit", function (event) {
         event.preventDefault();

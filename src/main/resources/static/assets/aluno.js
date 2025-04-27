@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const formAluno = document.querySelector("#formularioAluno form");
+    const formAluno = document.querySelector("#formularioAluno");
 
     formAluno.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -10,9 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
             dataNascimento: document.querySelector("#dataNascimento").value,
             cpf: document.querySelector("#cpf").value,
             endereco: document.querySelector("#endereco").value,
-            bairro: document.querySelector("#bairro").value, // Caso tenha o campo bairro
-            cidade: document.querySelector("#cidade").value,
-            estado: document.querySelector("#estado").value,
             telefone: document.querySelector("#telefone").value,
             email: document.querySelector("#email").value
         };

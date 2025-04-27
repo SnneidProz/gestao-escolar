@@ -14,19 +14,14 @@ public class AlunoService {
     @Autowired
     private Alunorepository alunoRepository;
 
-    public Aluno cadastrarAluno (Aluno aluno){
-        if (alunoRepository.findByCpf(aluno.getCpf()).isPresent()){
-            throw new RuntimeException("CPF já cadastrado");
-        }
-        return alunoRepository.save(aluno);
-    } 
+    public Optional<Aluno> buscarPorCpf(String cpf) {
+        return alunoRepository.findAll().stream()
+                .filter(aluno -> aluno.getCpf().equals(cpf))
+                .findFirst();
+    }
 
-    public List<Aluno> listarAlunos(){
+
+    public List<Aluno> listarTodos() {
         return alunoRepository.findAll();
     }
-
-    public Optional<Aluno> buscarPorCpf(String cpf){
-        return alunoRepository.findByCpf(cpf);
-    }
-
 }

@@ -1,5 +1,9 @@
 package com.neoseducation.gestao_escolar.entities;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -39,8 +43,19 @@ public class Turma {
     @JoinColumn(name = "disciplina_id", nullable = false)
     private Disciplina disciplina;
 
+    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<Aluno> alunos;
+
+
 
     // Getters e Setters
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
     public Long getId() {
         return id;
     }
