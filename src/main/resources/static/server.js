@@ -30,6 +30,44 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error("Erro ao cadastrar aluno:", error));
     });
 });
+
+function validarCPF() {
+    let cpf = document.getElementById('cpf').value.replace(/\D/g, '');
+    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+        document.getElementById('cpf').setCustomValidity('CPF inválido.');
+        return;
+    }
+    let soma = 0, resto;
+    for (let i = 1; i <= 9; i++) soma += parseInt(cpf[i - 1]) * (11 - i);
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf[9])) {
+        document.getElementById('cpf').setCustomValidity('CPF inválido.');
+        return;
+    }
+    soma = 0;
+    for (let i = 1; i <= 10; i++) soma += parseInt(cpf[i - 1]) * (12 - i);
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf[10])) {
+        document.getElementById('cpf').setCustomValidity('CPF inválido.');
+        return;
+    }
+    document.getElementById('cpf').setCustomValidity('');
+}
+function validarDataNascimentoAluno() {
+    let inputData = document.getElementById('data_nascimento');
+    let dataSelecionada = new Date(inputData.value);
+    let hoje = new Date();
+    let idadeMinima = 10;
+    let dataLimite = new Date(hoje.getFullYear() - idadeMinima, hoje.getMonth(), hoje.getDate());
+    
+    if (dataSelecionada > dataLimite) {
+        inputData.setCustomValidity('O Aluno deve ter pelo menos 10 anos de idade.');
+    } else {
+        inputData.setCustomValidity('');
+    }
+}
 //Cadastro de professor
 document.addEventListener("DOMContentLoaded", function () {
     const formProfessor = document.querySelector("#formularioProfessor form");
@@ -61,6 +99,19 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error("Erro ao cadastrar professor:", error));
     });
 });
+function validarDataNascimentoProf() {
+    let inputData = document.getElementById('data_nascimento');
+    let dataSelecionada = new Date(inputData.value);
+    let hoje = new Date();
+    let idadeMinima = 18;
+    let dataLimite = new Date(hoje.getFullYear() - idadeMinima, hoje.getMonth(), hoje.getDate());
+    
+    if (dataSelecionada > dataLimite) {
+        inputData.setCustomValidity('O professor deve ter pelo menos 18 anos de idade.');
+    } else {
+        inputData.setCustomValidity('');
+    }
+}
 //Campos disciplina no professor
 document.addEventListener("DOMContentLoaded", function () {
     const selectDisciplina = document.querySelector("#disciplina");

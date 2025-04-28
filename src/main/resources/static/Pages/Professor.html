@@ -22,7 +22,7 @@
                     <li class="nav-item"><a class="nav-link" href="Professor.html">Professores</a></li>
                     <li class="nav-item"><a class="nav-link" href="Disciplina.html">Disciplinas</a></li>
                     <li class="nav-item"><a class="nav-link" href="turmas.html">Turmas</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="../Pages/Vizualizar.html">Classroom</a></li>
+                    <li class="nav-item"><a class="nav-link " href="Vizualizar.html">Consultar Turmas</a></li>
                 </ul>
             </div>
         </div>
@@ -39,7 +39,7 @@
             
             <div class="col-md-6">
                 <label for="data_nascimento" class="form-label">Data de Nascimento</label>
-                <input type="date" class="form-control" id="dataNascimento" required oninput="validarDataNascimento()">
+                <input type="date" class="form-control" id="dataNascimento" required oninput="validarDataNascimentoProf()">
                 <div class="invalid-feedback">O professor deve ter pelo menos 18 anos de idade.</div>
             </div>
             
@@ -80,5 +80,28 @@
     </div>
     <script src="../assets/script.js"></script>
     <script src="../assets/professor.js"></script>
+    <script>
+        (function () {
+             'use strict'
+             var forms = document.querySelectorAll('.needs-validation')
+             Array.prototype.slice.call(forms)
+                 .forEach(function (form) {
+                     form.addEventListener('submit', function (event) {
+                         let select = document.getElementById('disciplina');
+                         if (select.selectedOptions.length === 0 || select.selectedOptions.length > 3) {
+                             select.setCustomValidity('Selecione no máximo 3 disciplinas.');
+                         } else {
+                             select.setCustomValidity('');
+                         }
+ 
+                         if (!form.checkValidity()) {
+                             event.preventDefault()
+                             event.stopPropagation()
+                         }
+                         form.classList.add('was-validated')
+                     }, false)
+                 })
+         })()
+     </script>
 </body>
 </html>
