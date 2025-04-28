@@ -25,6 +25,12 @@ public class Aluno {
     @Past(message = "Data de nascimento deve ser uma data válida no passado")
     private LocalDate dataNascimento;
 
+    //Matricula é o mesmo que ID
+    @NotNull(message = "Matrícula é obrigatória")
+    @Column(unique = true)
+    private String matricula;
+
+
     private String endereco;
     private String telefone;
     
@@ -59,4 +65,11 @@ public class Aluno {
     public void setTurma(Turma turma) {
         this.turma = turma;
     }
+    public String getMatricula() {
+        return matricula;
+    }
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
 }
+

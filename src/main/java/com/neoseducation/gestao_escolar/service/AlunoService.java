@@ -24,4 +24,11 @@ public class AlunoService {
     public List<Aluno> listarTodos() {
         return alunoRepository.findAll();
     }
+
+    // Método para buscar aluno por Matricula
+    public Optional<Aluno> buscarPorMatricula(String matricula) {
+        return alunoRepository.findByMatricula(matricula);
+    }
+    // Método para salvar aluno
+
 }

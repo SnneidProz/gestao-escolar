@@ -37,35 +37,37 @@ public class TurmaController {
     @PostMapping
     public ResponseEntity<?> criarTurma(@RequestBody Turma turma) {
         try {
+            // Verifica se o professor existe
             Optional<Professor> professorOptional = professorRepository.findById(turma.getProfessor().getId());
             if (professorOptional.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Professor não encontrado.");
             }
-    
+
+            // Verifica se a disciplina existe
             Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(turma.getDisciplina().getId());
             if (disciplinaOptional.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Disciplina não encontrada.");
             }
-    
+
+            // Processa os IDs dos alunos e busca os dados completos
             List<Aluno> alunosCompletos = turma.getAlunos().stream()
-                .map(aluno -> alunoRepository.findById(aluno.getId())
-                    .orElseThrow(() -> new RuntimeException("Aluno com ID " + aluno.getId() + " não encontrado.")))
-                .toList();
-    
+            .map(aluno -> {
+                Aluno alunoCompleto = alunoRepository.findById(aluno.getId())
+                    .orElseThrow(() -> new RuntimeException("Aluno com ID " + aluno.getId() + " não encontrado."));
+                alunoCompleto.setTurma(turma); // Configura o relacionamento inverso
+                return alunoCompleto;
+            })
+            .toList();
+        
+            turma.setAlunos(alunosCompletos); // Associa os alunos completos à turma 
             turma.setProfessor(professorOptional.get());
             turma.setDisciplina(disciplinaOptional.get());
-    
-            Turma novaTurma = turmaRepository.save(turma); // Primeiro salva a turma para gerar o ID
-    
-            for (Aluno aluno : alunosCompletos) {
-                aluno.setTurma(novaTurma); // Agora associa a turma recém-criada nos alunos
-                alunoRepository.save(aluno); // Salva o aluno atualizado
-            }
-    
-            novaTurma.setAlunos(alunosCompletos); // Atualiza a lista de alunos na turma (opcional)
+
+            // Salva a turma no banco de dados
+            Turma novaTurma = turmaRepository.save(turma);
             return ResponseEntity.status(HttpStatus.CREATED).body(novaTurma);
-    
         } catch (Exception e) {
+            e.printStackTrace(); // Log detalhado do erro
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar turma: " + e.getMessage());
         }
     }

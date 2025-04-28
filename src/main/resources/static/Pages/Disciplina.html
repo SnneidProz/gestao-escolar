@@ -22,6 +22,7 @@
                     <li class="nav-item"><a class="nav-link" href="Professor.html">Professores</a></li>
                     <li class="nav-item"><a class="nav-link" href="Disciplina.html">Disciplinas</a></li>
                     <li class="nav-item"><a class="nav-link" href="turmas.html">Turmas</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="Vizualizar.html">Classroom</a></li>
                 </ul>
             </div>
         </div>
@@ -62,98 +63,7 @@
         </div>
     </form>
 
-    <hr class="my-5">
 
-    <h3 class="mb-3">Lista de Disciplinas</h3>
-    <input type="text" class="form-control mb-3" id="buscaDisciplina" placeholder="Buscar por nome ou código..." oninput="filtrarDisciplinas()">
-
-    <table class="table table-bordered table-striped" id="tabelaDisciplinas">
-        <thead class="table-dark">
-        <tr>
-            <th>Nome</th>
-            <th>Código</th>
-            <th>Carga Horária</th>
-            <th>Professor</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <tbody id="listaDisciplinas">
-            <!-- As disciplinas serão listadas aqui dinamicamente -->
-        </tbody>
-    </table>
-</div>
-
-<script>
-    const disciplinas = [];
-
-    function atualizarTabela() {
-        const tbody = document.getElementById('listaDisciplinas');
-        tbody.innerHTML = '';
-        disciplinas.forEach((d, i) => {
-            const row = `<tr>
-                <td>${d.nome}</td>
-                <td>${d.codigo}</td>
-                <td>${d.carga}h</td>
-                <td>${d.professor}</td>
-                <td>
-                    <button class="btn btn-warning btn-sm me-1" onclick="editarDisciplina(${i})">Editar</button>
-                    <button class="btn btn-danger btn-sm" onclick="excluirDisciplina(${i})">Excluir</button>
-                </td>
-            </tr>`;
-            tbody.innerHTML += row;
-        });
-    }
-
-    function filtrarDisciplinas() {
-        const busca = document.getElementById('buscaDisciplina').value.toLowerCase();
-        const linhas = document.querySelectorAll('#listaDisciplinas tr');
-        linhas.forEach(linha => {
-            const texto = linha.textContent.toLowerCase();
-            linha.style.display = texto.includes(busca) ? '' : 'none';
-        });
-    }
-
-    function editarDisciplina(index) {
-        const d = disciplinas[index];
-        document.getElementById('nomeDisciplina').value = d.nome;
-        document.getElementById('codigoDisciplina').value = d.codigo;
-        document.getElementById('cargaHoraria').value = d.carga;
-        document.getElementById('professorResponsavel').value = d.idProf;
-        disciplinas.splice(index, 1);
-        atualizarTabela();
-    }
-
-    function excluirDisciplina(index) {
-        disciplinas.splice(index, 1);
-        atualizarTabela();
-    }
-
-    document.getElementById('formDisciplina').addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (!this.checkValidity()) {
-            this.classList.add('was-validated');
-            return;
-        }
-
-        const codigo = document.getElementById('codigoDisciplina').value;
-        if (disciplinas.some(d => d.codigo === codigo)) {
-            alert('Já existe uma disciplina com esse código.');
-            return;
-        }
-
-        const nome = document.getElementById('nomeDisciplina').value;
-        const carga = parseInt(document.getElementById('cargaHoraria').value);
-        const idProf = document.getElementById('professorResponsavel').value;
-        const nomeProf = document.getElementById('professorResponsavel').selectedOptions[0].text;
-
-        disciplinas.push({ nome, codigo, carga, idProf, professor: nomeProf });
-        this.reset();
-        this.classList.remove('was-validated');
-        atualizarTabela();
-    });
-    
-    
-</script>
 <script src="../assets/script.js"></script>
 <script src="../assets/disciplina.js"></script>
 </body>

@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container_nav">
-            <a class="navbar-brand" href="/index.html">Neos Education</a>
+            <a class="navbar-brand" href="../Pages/index.html">Neos Education</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="menu-toggle">☰</span>
             </button>
@@ -22,6 +22,7 @@
                     <li class="nav-item"><a class="nav-link" href="Professor.html">Professores</a></li>
                     <li class="nav-item"><a class="nav-link" href="Disciplina.html">Disciplinas</a></li>
                     <li class="nav-item"><a class="nav-link" href="turmas.html">Turmas</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../Pages/Vizualizar.html">Classroom</a></li>
                 </ul>
             </div>
         </div>
@@ -43,7 +44,7 @@
             </div>
             <div class="col-md-6">
                 <label for="periodo" class="form-label">periodo</label>
-                <input type="number" class="form-control" id="periodo" placeholder="Ex.: 6" required>
+                <input type="text" class="form-control" id="periodo" placeholder="Ex.: 6" required>
                 <div class="invalid-feedback">Informe o periodo.</div>
             </div>
     
@@ -53,16 +54,6 @@
                 </select>
                 <div class="invalid-feedback">Selecione pelo menos um aluno.</div>
             </div>
-            <div class="col-md-12">
-                <label for="turno" class="form-label">Turno</label>
-                <select class="form-select" id="turno" required>
-                    <option value="Manhã">Manhã</option>
-                    <option value="Tarde">Tarde</option>
-                    <option value="Noite">Noite</option>
-                </select>
-                <div class="invalid-feedback">Selecione pelo menos um turno.</div>
-            </div>
-    
             <div class="col-md-6">
                 <label for="professorTurma" class="form-label">Professor Responsável</label>
                 <select class="form-select" id="professor" required>
@@ -78,6 +69,16 @@
                 </select>
                 <div class="invalid-feedback">Selecione uma disciplina.</div>
             </div>
+            <div class="col-md-12">
+                <label for="turno" class="form-label">Turno</label>
+                <select class="form-select" id="turno" required>
+                    <option value="Manhã">Manhã</option>
+                    <option value="Tarde">Tarde</option>
+                    <option value="Noite">Noite</option>
+                </select>
+                <div class="invalid-feedback">Selecione pelo menos um turno.</div>
+            </div>
+    
     
             <div class="col-12 text-center">
                 <button class="btn btn-primary" type="submit">Cadastrar Turma</button>

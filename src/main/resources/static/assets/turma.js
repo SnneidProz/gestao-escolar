@@ -19,7 +19,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Obtém os nomes dos alunos selecionados
         const alunosSelecionados = Array.from(document.querySelector("#aluno").selectedOptions)
-        .map(option => option.text.trim());
+            .map(option => {
+                return { id: parseInt(option.value)};
+            });
 
         // Valida os campos
         if (!codigo || isNaN(anoLetivo) || anoLetivo < 2023 || anoLetivo > 2100 || isNaN(professorId) || isNaN(disciplinaId) || alunosSelecionados.length === 0) {
@@ -35,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
             disciplina: { id: disciplinaId },
             turno: turno,
             periodo: periodo,
-            alunos: alunosSelecionados.map(nome => ({ nome })) // Converte os nomes para objetos
+            alunos: alunosSelecionados
         };
 
         // Envia os dados para o backend

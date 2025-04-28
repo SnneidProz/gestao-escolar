@@ -48,13 +48,20 @@ public class AlunoController {
     }
     
     @PostMapping("/registrar")
-    public ResponseEntity<Aluno> registrarAluno(@RequestBody Aluno aluno){try{
-        return ResponseEntity.status(HttpStatus.CREATED).body(alunoRepository.save(aluno));}
-        catch (IllegalArgumentException e){
+    public ResponseEntity<Aluno> registrarAluno(@RequestBody Aluno aluno) {
+        try {
+            // Gera a matrícula automaticamente
+            String matricula = "MAT" + System.currentTimeMillis(); // Exemplo: MAT + timestamp
+            aluno.setMatricula(matricula);
+
+            // Salva o aluno no banco de dados
+            Aluno novoAluno = alunoRepository.save(aluno);
+            return ResponseEntity.status(HttpStatus.CREATED).body(novoAluno);
+        } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
-
     @GetMapping("/cpf")
     public ResponseEntity<Aluno> buscarPorCpf(@PathVariable String cpf) {
         Optional<Aluno> aluno = alunoService.buscarPorCpf(cpf);
